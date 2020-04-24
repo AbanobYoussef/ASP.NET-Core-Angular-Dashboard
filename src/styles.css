@@ -14,6 +14,11 @@ body{
     height: 100%;
 }
 
+.nav
+{
+    
+    font-size: .8em !important;
+}
 
 a{
     color: #44a4cd;
