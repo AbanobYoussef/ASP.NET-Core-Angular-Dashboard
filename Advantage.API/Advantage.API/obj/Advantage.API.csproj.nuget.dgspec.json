@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Dashboard\\Advantage.API\\Advantage.API.csproj": {}
+    "D:\\Dashboard\\Advantage.API\\Advantage.API\\Advantage.API.csproj": {}
   },
   "projects": {
-    "D:\\Dashboard\\Advantage.API\\Advantage.API.csproj": {
+    "D:\\Dashboard\\Advantage.API\\Advantage.API\\Advantage.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Dashboard\\Advantage.API\\Advantage.API.csproj",
+        "projectUniqueName": "D:\\Dashboard\\Advantage.API\\Advantage.API\\Advantage.API.csproj",
         "projectName": "Advantage.API",
-        "projectPath": "D:\\Dashboard\\Advantage.API\\Advantage.API.csproj",
+        "projectPath": "D:\\Dashboard\\Advantage.API\\Advantage.API\\Advantage.API.csproj",
         "packagesPath": "C:\\Users\\Abanob\\.nuget\\packages\\",
-        "outputPath": "D:\\Dashboard\\Advantage.API\\obj\\",
+        "outputPath": "D:\\Dashboard\\Advantage.API\\Advantage.API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -22,14 +22,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netcoreapp2.1"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "netcoreapp2.1": {
             "projectReferences": {}
           }
         },
@@ -40,19 +40,24 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "netcoreapp2.1": {
           "dependencies": {
-            "Microsoft.EntityFrameworkCore.Design": {
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.3, )"
+              "version": "[2.1.1, )",
+              "autoReferenced": true
             },
-            "Microsoft.EntityFrameworkCore.Tools": {
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.3, )"
+              "version": "[2.1.2, )"
             },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
               "target": "Package",
-              "version": "[3.1.3, )"
+              "version": "[2.1.0, )",
+              "autoReferenced": true
             }
           },
           "imports": [
@@ -65,14 +70,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
