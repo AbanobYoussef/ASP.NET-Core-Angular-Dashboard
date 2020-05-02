@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,106 +20,76 @@ namespace Advantage.API.Controllers
             _context = context;
         }
 
-        // GET: api/Servers
-        [HttpGet]
-        public IEnumerable<Servers> GetServers()
-        {
-            return _context.Servers;
-        }
-
-        // GET: api/Servers/5
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetServers([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var servers = await _context.Servers.FindAsync(id);
-
-            if (servers == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(servers);
-        }
-
-        // PUT: api/Servers/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutServers([FromRoute] int id, [FromBody] Servers servers)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != servers.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(servers).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ServersExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-        // POST: api/Servers
-        [HttpPost]
-        public async Task<IActionResult> PostServers([FromBody] Servers servers)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            _context.Servers.Add(servers);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetServers", new { id = servers.Id }, servers);
-        }
-
-        // DELETE: api/Servers/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteServers([FromRoute] int id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var servers = await _context.Servers.FindAsync(id);
-            if (servers == null)
-            {
-                return NotFound();
-            }
-
-            _context.Servers.Remove(servers);
-            await _context.SaveChangesAsync();
-
-            return Ok(servers);
-        }
-
-        private bool ServersExists(int id)
-        {
-            return _context.Servers.Any(e => e.Id == id);
-        }
+    // GET api/server
+    [HttpGet]
+    public IActionResult Get()
+    {
+      var response = _context.Servers.OrderBy(s => s.Id).ToList();
+      return Ok(response);
     }
+
+    // GET api/server/5
+    [HttpGet("{id}", Name = "GetServer")]
+    public Servers Get(int id)
+    {
+      return _context.Servers.Find(id);
+    }
+
+    // POST api/server
+    [HttpPost]
+    public IActionResult Post([FromBody] Servers server)
+    {
+      if (server == null)
+      {
+        return BadRequest();
+      }
+
+      _context.Servers.Add(server);
+      _context.SaveChanges();
+
+      return CreatedAtRoute("GetServer", new { id = server.Id }, server);
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult Message(int id, [FromBody] ServerMessage msg)
+    {
+
+      var server = _context.Servers.FirstOrDefault(s => s.Id == id);
+
+      if (server == null)
+      {
+        return NotFound();
+      }
+
+      // move update handling to a service, perhaps
+      if (msg.Payload == "activate")
+      {
+        server.isOnline = true;
+        _context.SaveChanges();
+      }
+
+      if (msg.Payload == "deactivate")
+      {
+        server.isOnline = false;
+        _context.SaveChanges();
+      }
+
+      return new NoContentResult();
+    }
+
+    // DELETE api/server/5
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+      var server = _context.Servers.FirstOrDefault(t => t.Id == id);
+      if (server == null)
+      {
+        return NotFound();
+      }
+
+      _context.Servers.Remove(server);
+      _context.SaveChanges();
+      return new NoContentResult();
+    }
+  }
 }
