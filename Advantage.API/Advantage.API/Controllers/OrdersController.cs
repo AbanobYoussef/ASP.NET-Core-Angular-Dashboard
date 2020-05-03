@@ -43,7 +43,7 @@ namespace Advantage.API.Controllers
 
 
 
-    [HttpGet("ByState")]
+    [HttpGet("byState")]
     public IActionResult ByState()
     {
       var orders = _context.Orders.Include(o => o.customer).ToList();
