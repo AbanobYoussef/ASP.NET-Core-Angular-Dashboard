@@ -17,7 +17,7 @@ export class SectionOdersComponent implements OnInit {
   loading = false;
 
   // tslint:disable-next-line:variable-name
-  constructor(public serv: SalesDataService) { }
+  constructor(private serv: SalesDataService) { }
 
 
   ngOnInit(): void {

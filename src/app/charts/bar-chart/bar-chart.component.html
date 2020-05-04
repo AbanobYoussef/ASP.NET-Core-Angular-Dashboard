@@ -1,9 +1,4 @@
-<div class="chart"> 
-    <canvas baseChart 
-        [datasets]="barChartDate"
-        [labels]="barChartLabels"
-        [options]="barChartOptions"
-        [legend]="barChartLegend"
-        [chartType]="barChartType">
+<div class="chart">
+    <canvas baseChart *ngIf='barChartDate && barChartDate.length > 0' [datasets]="barChartDate" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
     </canvas>
 </div>
