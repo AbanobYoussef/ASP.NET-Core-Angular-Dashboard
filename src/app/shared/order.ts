@@ -3,6 +3,7 @@ import { Data } from '@angular/router';
 import {Customer} from  './customer';
 
 export interface Order{
+    orders: any;
     id: number;
     customer: Customer;
     total: number;

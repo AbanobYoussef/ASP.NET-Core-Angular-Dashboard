@@ -1,11 +1,4 @@
-<div class="chart"> 
-    <canvas baseChart 
-    style="width: 100%; height: 100%;"
-        [datasets]="lineChartDate"
-        [labels]="lineChartLabels"
-        [options]="lineChartOptions"
-        [legend]="lineChartLegend"
-        [colors]="lineChartColors"
-        [chartType]="lineChartType">
+<div class="chart">
+    <canvas baseChart *ngIf='lineChartData' style="width: 100%; height: 100%;" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [legend]="lineChartLegend" [colors]="lineChartColors" [chartType]="lineChartType">
     </canvas>
 </div>

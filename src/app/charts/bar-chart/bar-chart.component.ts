@@ -37,12 +37,12 @@ export class BarChartComponent implements OnInit {
   ngOnInit(): void {
 
     this.serv.getOrders(1, 100).subscribe(res => {
-     // console.log(res);
+      // console.log(res);
       const localChartData = this.getChartData(res);
       this.barChartLabels = localChartData.map(x => x[0]).reverse();
       this.barChartDate = [ { data: localChartData.map(x => x[1]), label: 'Sales'} ];
 
-      console.log( this.barChartDate);
+      // console.log( this.barChartDate);
 
     });
   }
