@@ -1,4 +1,5 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input , Output , EventEmitter} from '@angular/core';
+import { ServerMessage } from '../shared/server-message';
 import { Server } from '../shared/server';
 
 @Component({
@@ -8,34 +9,63 @@ import { Server } from '../shared/server';
 })
 export class ServerComponent implements OnInit {
 
+
   constructor() { }
-  color:string;
-  buttonText:string;
+  color: string;
+  buttonText: string;
+  serverStatus: string;
+  isLoading: boolean;
 
-
-@Input() server:Server;
+@Input() server: Server;
+@Output() serverAction = new EventEmitter<ServerMessage>();
 
   ngOnInit(): void {
     this.setServerAction(this.server.isOnline);
   }
 
 
-  setServerAction(isOnline:boolean)
+  setServerAction(isOnline: boolean)
   {
-    if(!isOnline){
-      this.server.isOnline=true;
-      this.color='#66BB6A';
-      this.buttonText='Shut Down';
+    if( isOnline){
+      this.server.isOnline = true;
+      this.serverStatus = 'Online';
+      this.color = '#66BB6A';
+      this.buttonText = 'Shut Down';
     }else{
-      this.server.isOnline=false;
-      this.color='#FF6B6B';
-      this.buttonText='Start';
+      this.server.isOnline = false;
+      this.serverStatus = 'Offline';
+      this.color = '#FF6B6B';
+      this.buttonText = 'Start';
     }
   }
 
-  toggleStatus(){
-    console.log(this.server.name , ' : ',this.server.isOnline);
-    this.setServerAction(this.server.isOnline);
+
+  makeLoading() {
+    this.color = '#FFCA28';
+    this.buttonText = 'Pending...';
+    this.isLoading = true;
+    this.serverStatus = 'Loading';
   }
 
+  sendServerAction(isOnline: boolean) {
+    console.log('sendServerAction called!');
+    this.makeLoading();
+    const payload = this.buildPayload(isOnline);
+    this.serverAction.emit(payload);
+  }
+
+
+  buildPayload(isOnline: boolean): ServerMessage {
+    if (isOnline) {
+      return {
+        id: this.server.id,
+        payload: 'deactivate'
+      };
+    } else {
+      return {
+        id: this.server.id,
+        payload: 'activate'
+      };
+    }
+  }
 }

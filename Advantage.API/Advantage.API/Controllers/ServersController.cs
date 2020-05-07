@@ -20,7 +20,7 @@ namespace Advantage.API.Controllers
             _context = context;
         }
 
-    // GET api/server
+    // GET api/servers
     [HttpGet]
     public IActionResult Get()
     {
@@ -28,14 +28,14 @@ namespace Advantage.API.Controllers
       return Ok(response);
     }
 
-    // GET api/server/5
+    // GET api/servers/5
     [HttpGet("{id}", Name = "GetServer")]
     public Servers Get(int id)
     {
       return _context.Servers.Find(id);
     }
 
-    // POST api/server
+    // POST api/servers
     [HttpPost]
     public IActionResult Post([FromBody] Servers server)
     {

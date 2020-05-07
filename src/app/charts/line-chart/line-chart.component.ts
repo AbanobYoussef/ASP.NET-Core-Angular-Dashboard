@@ -68,7 +68,7 @@ export class LineChartComponent implements OnInit {
 
       // tslint:disable-next-line:no-string-literal
       const r = this.getCustomerOrdersByDate(allChartData, dates)['data'];
-      console.log('r:', r);
+     // console.log('r:', r);
 
       // tslint:disable-next-line:no-string-literal
       this.lineChartLabels = r[0]['orders'].map(o => o['date']);
